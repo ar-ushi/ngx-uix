@@ -1,0 +1,7 @@
+<button 
+[ngStyle]="buttonConfig" 
+(click)="onClickButton($event)"
+(keydown.enter)="onClickButton($event)"
+>
+<ng-content></ng-content>
+</button>

@@ -1,0 +1,100 @@
+.dropdown{
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    .disabled{
+      opacity: 0.25;
+    }
+  
+    .disabled {
+      background-color: #cac8c8;
+    }
+    
+    .dropdown-btn{
+        display:inline-flex;
+        border: 1px solid #adadad;
+        width: 100%;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-weight: normal;
+        line-height: 1.52857143;
+        text-align: left;
+        vertical-align: middle;
+        cursor: pointer;
+        border-radius: 4px;
+        .dropdown-search{
+          input[type="text"] {
+            all: initial;
+            width: 100%;
+          }
+          ::placeholder{
+            color: black;
+          }
+          input:focus::placeholder{
+            display: none;
+            visibility: hidden;
+          }
+        }
+    }
+    .close-btn{
+      border: none;
+      background-color: transparent;
+      font-size: 15px;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      opacity: 0.5;
+    }
+    .close-btn:hover{
+      opacity: 1;
+    }
+    .selected-option-container{
+      display: inline-flex;
+    }
+    .chip-row{
+      display: inline-flex;
+      gap:0.5rem
+  }
+    .dropdown-data{
+        position: absolute;
+        width: 100%;
+        z-index: 9999;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-top: -2px;
+        ul {
+            padding: 0px 0px 0px 1rem;
+            overflow: auto;
+            list-style: none;
+            margin: 0px;
+        }
+        li {
+            padding: 6px 10px;
+            padding-left: 0px;
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+        .dropdown-option-subtitle{
+          font-size: 12px;
+        }
+        .item-checkbox:hover{
+            background-color: #ffffff71;
+          }  
+          .item-checkbox input + div {
+            padding-left: 0.5rem;
+            vertical-align: middle;
+            user-select: none;
+            cursor: pointer;
+            margin: 0px;
+            color: #000;
+          }
+    }
+}
+
+.error-msg{
+  color: red;
+  margin: 5px;
+  font-size: 12px;
+}

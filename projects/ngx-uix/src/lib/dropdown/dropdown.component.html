@@ -1,0 +1,43 @@
+<div tabindex="0" class="dropdown" (blur)="onTouched()" (clickOutside)="closeDropdown()"> 
+    <div [class.disabled]="disabled">
+      <section>
+      <button tabindex="-1" class="dropdown-btn" (click)="toggleDropdown()">
+          <div class="dropdown-search" [hidden]="selectedOptions.length> 0">
+            <input id=search autocomplete [searchData]="originalData" type = "text" placeholder="{{_placeholder}}" [readOnly]= "!_config.allowSearch" (filteredDataList)="getFilteredData($event)"/>
+          </div>
+          <button [hidden]="selectedOptions.length == 0" (click) = "removeSelectedOptions(selectedOptions); $event.stopPropagation()" class="close-btn">
+            <ng-container *ngIf="_config.closeIconSrc; else defaultClose">
+              <img [src]="_config.closeIconSrc" alt="Close Dropdown"/>
+            </ng-container>
+            <ng-template #defaultClose>&times;</ng-template>
+          </button>
+          <section [ngClass]="_chips ? 'chip-row' : 'selected-option-container'">
+            <div *ngFor="let option of selectedOptions; let last= last">
+              <ng-container *ngIf = "_chips">
+                  <span chip closeable (closeChip)="removeSelectedOptions(option)">{{option.text}}</span>    
+              </ng-container>
+                <span *ngIf="chips" class="selected-item">
+                  <span>{{option.text}}</span>    
+                <ng-container *ngIf="!last">,&nbsp;</ng-container>
+              </span>
+            </div>
+          </section>
+      </button>
+    </section>
+        <section [hidden] = "!_config.defaultOpen"class="dropdown-data">
+            <ul>
+                <li *ngFor="let item of data; let i = index;" (click)="clickOption($event,item); $event.stopPropagation()" class="item-checkbox">
+                  <input type=checkbox [attr.aria-label]="item" [checked] = "item.selected" [disabled]="disabled || item.disabled" />
+                  <div class="flex-column">
+                  <div class="dropdown-option">{{item.text}}</div>
+                  <ng-container *ngIf="item.subtitle">
+                    <div class="dropdown-option-subtitle">{{ item.subtitle }}</div>
+                  </ng-container>
+                </div>
+                </li>
+              </ul>
+        </section>
+    </div>
+  </div>
+  <div [hidden]="!showMaximumSelectionError" class="error-msg">{{_config.maximumSelectionErrorMsg}}</div>
+  <div [hidden]="!noResultsFoundErrorMsg" class="error-msg">{{noResultsFoundErrorMsg}}</div>
