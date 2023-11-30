@@ -5,7 +5,7 @@ import { Observable, of } from "rxjs";
 
 
 @Directive({
-    selector: '[autocomplete]',
+    selector: '[uixautocomplete]',
     standalone: true,
   })
 

@@ -2,7 +2,7 @@ import { ComponentRef, Directive, ElementRef, HostListener, Input, ViewContainer
 import { TooltipComponent } from './tooltip.component';
 
 @Directive({
-  selector: '[tooltip]',
+  selector: '[uix-tooltip]',
 })
 export class TooltipDirective {
 
