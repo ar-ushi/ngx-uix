@@ -1,10 +1,37 @@
 {
   "name": "ngx-uix",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.0",
+  "description": "Configurable collection of meticulously crafted UI components designed for flexibility, customization and seamless integration in Angular",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
     "@angular/core": "^16.2.0"
   },
+  "bugs": "https://github.com/ar-ushi/ngx-uix/issues",
+  "homepage": "https://github.com/ar-ushi/ngx-uix.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ar-ushi/ngx-uix.git"
+  },
+  "keywords": [
+    "angular",
+    "ui",
+    "ngx",
+    "components",
+    "library",
+    "configurable",
+    "reusable",
+    "user-interface",
+    "widgets",
+    "frontend",
+    "directive",
+    "chips",
+    "tooltip",
+    "button",
+    "dropdown",
+    "typeahead",
+    "autocomplete"
+  ],
   "dependencies": {
     "tslib": "^2.3.0"
   },
