@@ -1,10 +1,10 @@
 import { ComponentRef, Directive, ElementRef, HostListener, Input, ViewContainerRef} from '@angular/core';
-import { TooltipComponent } from './tooltip.component';
+import { UixTooltipComponent } from './tooltip.component';
 
 @Directive({
   selector: '[uix-tooltip]',
 })
-export class TooltipDirective {
+export class UixTooltipDirective {
 
   @Input() tooltip = '';
   @Input() position?: 'above' | 'below' | 'right' | 'left' =  'below';
@@ -12,8 +12,8 @@ export class TooltipDirective {
   @Input() ttbgcolor?: string = 'black';
   @Input() transition? : 'fade-in' | 'fade-out' | 'none' = 'none';
   @Input() duration? : number;
-  private componentRef: ComponentRef<TooltipComponent> | null = null;
-  private componentPool : ComponentRef<TooltipComponent>[] = []; //component pool only for tooltip events
+  private componentRef: ComponentRef<UixTooltipComponent> | null = null;
+  private componentPool : ComponentRef<UixTooltipComponent>[] = []; //component pool only for tooltip events
 
   constructor(
 	private elementRef: ElementRef,
@@ -119,9 +119,8 @@ export class TooltipDirective {
   }
   }
   createAndAttachTooltip() {
-    this.componentRef = this.viewContainerRef.createComponent(TooltipComponent);
+    this.componentRef = this.viewContainerRef.createComponent(UixTooltipComponent);
     this.setTooltipProperties();
-    console.log(this.componentRef)
     this.componentRef.changeDetectorRef.detectChanges();
   }
 

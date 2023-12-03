@@ -1,30 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ElementRef, forwardRef,HostListener, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ChipsComponent } from '../chips/chips.component';
+import { UixChipsComponent } from '../chips/chips.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { AutoCompleteDirective } from '../autocomplete/autocomplete.directive';
-import { ClickOutsideDirective } from '../clickoutside/clickoutside.directive';
+import { UixAutoCompleteDirective } from '../autocomplete/autocomplete.directive';
+import { UixClickOutsideDirective } from '../clickoutside/clickoutside.directive';
 import { BaseClass } from '../common-behaviors/base';
 import { Colors } from '../common-behaviors/colors';
 import { createColorObject } from '../common-behaviors/common';
 import { DropDownConfig, DropdownItem } from './dropdown.util';
 
-export const DropdownControlValueAccessor : any ={
+export const UixDropdownControlValueAccessor : any ={
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => DropdownComponent),
+  useExisting: forwardRef(() => UixDropdownComponent),
   multi: true
 }
 
 @Component({
   selector: 'uix-select',
   standalone: true,
-  providers: [DropdownControlValueAccessor],
-  imports : [CommonModule, BrowserModule, FormsModule, AutoCompleteDirective,ClickOutsideDirective, ChipsComponent],
+  providers: [UixDropdownControlValueAccessor],
+  imports : [CommonModule, BrowserModule, FormsModule, UixAutoCompleteDirective,UixClickOutsideDirective, UixChipsComponent],
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements ControlValueAccessor, AfterViewInit{
+export class UixDropdownComponent implements ControlValueAccessor, AfterViewInit{
 
 /* 
   data --> used to set & can be manipulated for search

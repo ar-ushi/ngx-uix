@@ -10,7 +10,7 @@ import { createColorObject } from '../common-behaviors/common';
   templateUrl: './chips.component.html',
   styleUrls: ['./chips.component.scss']
 })
-export class ChipsComponent implements AfterViewInit, OnDestroy{
+export class UixChipsComponent implements AfterViewInit, OnDestroy{
   _closeable : boolean  = false;
   isVisible : boolean = true;
   private styles : BaseClass;

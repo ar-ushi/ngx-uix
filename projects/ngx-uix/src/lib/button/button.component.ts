@@ -15,7 +15,7 @@ import { ButtonStyles } from './button.util';
 })
 
 
-export class ButtonComponent implements AfterViewInit{
+export class UixButtonComponent implements AfterViewInit{
 
 _config : ButtonStyles = {
   width : '150px',

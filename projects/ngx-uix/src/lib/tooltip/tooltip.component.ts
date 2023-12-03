@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss']
 })
-export class TooltipComponent implements OnInit{
+export class UixTooltipComponent implements OnInit{
   tooltip: string = '';
   position?: 'above' | 'below' | 'right' | 'left';
   left = 0;

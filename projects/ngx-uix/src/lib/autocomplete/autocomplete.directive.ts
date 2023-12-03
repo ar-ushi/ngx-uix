@@ -9,7 +9,7 @@ import { Observable, of } from "rxjs";
     standalone: true,
   })
 
-  export class AutoCompleteDirective {
+  export class UixAutoCompleteDirective {
     @Input() searchData?: string | Array<any>  //data can be api url (search box) or a list (dropdown)
     @Output() filteredDataList = new EventEmitter<Array<any>>;
     @Input() debounce = 300;

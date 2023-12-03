@@ -5,7 +5,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Output } from "@angu
     standalone: true,
 })
 
-export class ClickOutsideDirective {
+export class UixClickOutsideDirective {
 
     constructor(private el : ElementRef) {}
 
