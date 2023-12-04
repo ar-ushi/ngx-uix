@@ -49,6 +49,7 @@ _disabled: boolean = false;
 @Input() color? :  string;
 @Input() bgcolor? : string;
 @Input() fill :  'clear' | 'outline' | 'solid' = 'solid';
+@Input() type : 'text' | 'checkbox' | 'radio' = 'checkbox';
 selectedOptions: Array<DropdownItem>  = [];
 showMaximumSelectionError : boolean = false;
 enableSearch: boolean = false;
