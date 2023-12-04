@@ -13,7 +13,7 @@ export interface DropDownConfig{
 export class DropdownItem {
     id!: String | number;
     text!: String | number;
-    subtitle!: String|number;
+    subtitle?: String|number;
     selected?: boolean;
     disabled? : boolean = false;
     [key: string] : any;
