@@ -27,8 +27,9 @@ _config : ButtonStyles = {
 @Input() size? : 'xs' | 's' | 'l' | 'xl'
 @Input() color?: string;
 @Input() bgcolor?: string;
-@Input() fill :  'clear' | 'outline' | 'solid' = 'solid'
-@Input() variant?: 'lighter' | 'light' | 'dark' | 'darker'
+@Input() fill :  'clear' | 'outline' | 'solid' = 'solid';
+@Input() variant?: 'lighter' | 'light' | 'dark' | 'darker';
+@Input() factor? : number;
 @Output() onClick = new EventEmitter<any>();
 private styles : BaseClass;
 buttonClasses : any[] = [];
@@ -50,7 +51,6 @@ constructor(public _elementRef : ElementRef){
 }
 
 ngAfterViewInit(){
-  this.styles.colors.addColors(createColorObject(this.bgcolor!, this.color!, this.fill, this.variant!));
-  this.styles.size?.addSize(this.size!);
+  this.styles.colors.addColors(createColorObject(this.bgcolor!, this.color!, this.fill, this.variant!, this.factor!));  this.styles.size?.addSize(this.size!);
 }
 }

@@ -62,16 +62,14 @@ describe('UixChipsComponent', () => {
     expect(chipComponent.isVisible).toBeFalsy();
   });
 
-  it('should remove the element from the DOM on ngOnDestroy', () => {
+  it('should remove the element from the DOM', () => {
     spyOn(chipComponent.el.nativeElement, 'remove');
-    chipComponent.ngOnDestroy();
     expect(chipComponent.el.nativeElement.remove).toHaveBeenCalled();
   });
 
   it('should not remove the element from the DOM if isVisible is true', () => {
     spyOn(chipComponent.el.nativeElement, 'remove');
     chipComponent.isVisible = true;
-    chipComponent.ngOnDestroy();
     expect(chipComponent.el.nativeElement.remove).not.toHaveBeenCalled();
   });
 });

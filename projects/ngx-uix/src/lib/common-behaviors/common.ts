@@ -4,7 +4,8 @@ export type Color = {
     color: string;
     type: 'text' | 'background';
     fill?: 'clear' | 'outline' | 'solid';
-    variant? : 'lighter' | 'light' | 'dark' | 'darker'
+    variant? : 'lighter' | 'light' | 'dark' | 'darker';
+    factor?:number;
 }
 
 export enum sizeMultiplier {
@@ -22,9 +23,9 @@ enum variantFactors {
     darker = 0.5,
 }
 
-export function createColorObject(bgcolor : string, color: string, fill?: 'clear' | 'outline' | 'solid', variant?: keyof typeof variantFactors){
+export function createColorObject(bgcolor : string, color: string, fill?: 'clear' | 'outline' | 'solid', variant?: keyof typeof variantFactors, factor?:number){
     const compColor : Color[] = [
-        {color: bgcolor!, type: 'background', fill: fill, variant: variant!},
+        {color: bgcolor!, type: 'background', fill: fill, variant: variant!, factor:factor!},
         {color: color!, type: 'text'}     
     ]
     return compColor;
@@ -35,7 +36,7 @@ export function createColorObject(bgcolor : string, color: string, fill?: 'clear
 
  Uses concepts of Shades (adding black) & Tints (adding white)
  */
-export function applyVariant(color: string, variant: keyof typeof variantFactors): string{    
+export function applyVariant(color: string, variant: keyof typeof variantFactors, factor?: number): string{    
     let adjustedRGB;
     const hexToRGB = (hex : string) => {
         //handle odd length hexcodes
@@ -43,11 +44,12 @@ export function applyVariant(color: string, variant: keyof typeof variantFactors
         return paddedColor.match(/[A-Za-z0-9]{2}/g)?.map((c) => parseInt(c,16)) || [0,0,0];
     }
     const rgb = hexToRGB(color);
+    const _factor = factor ? Math.min(1, Math.max(0, factor)) : variantFactors[variant]; //overriding variant with a custom factor
     //add variant styles
     if (variant === 'dark' || variant === 'darker'){
-         adjustedRGB = rgb.map((c) => Math.floor(c * variantFactors[variant]))
+         adjustedRGB = rgb.map((c) => Math.floor(c * _factor))
     } else {
-        adjustedRGB = rgb.map((c) => Math.floor((c + variantFactors[variant] * (255-c)))) 
+        adjustedRGB = rgb.map((c) => Math.floor((c + _factor * (255-c)))) 
     }
     const componentToHex = (c: number) => c.toString(16).padStart(2, '0');
     return `#${adjustedRGB.map(componentToHex).join('')}`;
