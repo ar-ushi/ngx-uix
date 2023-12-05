@@ -30,8 +30,8 @@ export class UixDropdownComponent implements ControlValueAccessor, AfterViewInit
   data --> used to set & can be manipulated for search
   originalData --> deep copy of data array for restoring values
 */
-data : Array<any> = []; 
-originalData : Array<any> = [];
+data : any;
+originalData : any; //TODO - Better way to do L33 and L34
 _placeholder:string = 'Select';
 private styles : BaseClass;
 _config: DropDownConfig = {
@@ -50,6 +50,7 @@ _disabled: boolean = false;
 @Input() bgcolor? : string;
 @Input() fill :  'clear' | 'outline' | 'solid' = 'solid';
 @Input() type : 'text' | 'checkbox' | 'radio' = 'checkbox';
+@Input() optionlabel? : string = 'text';
 selectedOptions: Array<DropdownItem>  = [];
 showMaximumSelectionError : boolean = false;
 enableSearch: boolean = false;
@@ -61,14 +62,14 @@ set placeholder(value:string){
 }
 
 @Input()
-set options(value : Array<any>){
-  if (!value){
-    this.data = [];
+set options(value : Array<any>|string){
+  if (typeof(value) === 'string'){
+    this.data = value;
+    this.originalData = value;
   } else {
-    this.data = value.map((item: any) => this.objectify(item))
-  }
-  this.originalData = JSON.parse(JSON.stringify(this.data));
-}
+    this.data = value.map((item: any) => this.objectify(item));
+    this.originalData = JSON.parse(JSON.stringify(this.data)); 
+  }}
 
 @Input()
 public set config(obj : DropDownConfig){
@@ -131,12 +132,12 @@ onTouch = () => {};
   }
 
   getFilteredData(filteredDataList: Array<any>){
-    this.data = [...filteredDataList];
     if (filteredDataList.length == 0){
       this.noResultsFoundErrorMsg= 'No results found. Modify your search';
       this.closeDropdown();
     } else {
       this.noResultsFoundErrorMsg = "";
+      this.data =  this.objectify(filteredDataList) //reinforce dropdown item
       this.openDropdown();
     }
   }
@@ -219,12 +220,12 @@ onTouch = () => {};
   }
 
   objectify(item : any){
-    return new DropdownItem(item);
+    return new DropdownItem(item,this.optionlabel);
   }
 
   addDefaultOptiontoSelection(obj : Array<DropdownItem>){
     const parentValueIds = obj.map((item) => item.id);
-    this.data.forEach((item) => {
+    this.data.forEach((item: DropdownItem) => {
       for (const i in parentValueIds){
         const val = parentValueIds[i];
         if (item.id == val){
@@ -237,7 +238,7 @@ onTouch = () => {};
 
   isASubSetof(obj : Array<DropdownItem>){
     const isSubSet = obj.every((objItem : any) => 
-    this.data.some(dataItem => 
+    this.data.some((dataItem: DropdownItem) => 
       this.deepCompareTwoObjects(objItem, dataItem)));
       return isSubSet;
   }
@@ -266,7 +267,7 @@ onTouch = () => {};
         }
       } else {
         obj = this.objectify(obj);
-        this.data.find(val => {
+        this.data.find((val: DropdownItem) => {
           if (val.id == obj.id){
             this.selectedOptions.push(val);
           }
